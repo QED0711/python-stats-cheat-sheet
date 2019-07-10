@@ -3,6 +3,8 @@ import './App.css';
 
 
 import HTMLRenderer from './components/HTMLRenderer';
+import SearchForm from './components/SearchForm';
+
 import parseHTML from './js/parseHTML';
 
 class App extends Component {
@@ -10,10 +12,15 @@ class App extends Component {
     super()
     this.state = {
       html: null,
-      topics: []
+      topics: [],
+      userSearch: {
+        type: "title",
+        match: ""
+      }
     }
     this.setHTML = this.setHTML.bind(this);
     this.setTopics = this.setTopics.bind(this);
+    this.setUserSearch = this.setUserSearch.bind(this);
   }
 
   componentDidMount = async () => {
@@ -35,6 +42,14 @@ class App extends Component {
     console.log(topicsArr)
     this.setState({topics: topicsArr})
   }
+
+  setUserSearch = ({ type, match }) => {
+    console.log({type, match})
+    this.setState({userSearch: {
+      type,
+      match
+    }})
+  }
   
   render = () => {
     
@@ -44,6 +59,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <SearchForm setUserSearch={this.setUserSearch} />
         {
           !!this.state.topics.length 
           &&
