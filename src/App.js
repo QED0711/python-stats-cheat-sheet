@@ -6,6 +6,7 @@ import HTMLRenderer from './components/HTMLRenderer';
 import SearchForm from './components/SearchForm';
 
 import parseHTML from './js/parseHTML';
+import filterTopics from './js/filterTopics';
 
 class App extends Component {
   constructor(){
@@ -15,7 +16,8 @@ class App extends Component {
       topics: [],
       userSearch: {
         type: "title",
-        match: ""
+        match: "",
+        matchRule: "anywhere"
       }
     }
     this.setHTML = this.setHTML.bind(this);
@@ -42,28 +44,32 @@ class App extends Component {
     this.setState({topics: topicsArr})
   }
 
-  setUserSearch = ({ type, match }) => {
-    this.setState({userSearch: {
-      type,
-      match
-    }})
+  setUserSearch = (searchParams) => {
+    this.setState({userSearch: searchParams})
   }
   
   render = () => {
-    let topicList;
-    if(this.state.userSearch.match.length && this.state.topics.length){
-      const regex = new RegExp(this.state.userSearch.match, 'ig')
-      topicList = this.state.topics.filter(topic => {
-        // debugger
-        return !!topic[this.state.userSearch.type].match(regex)
-      }) 
-    } else {
-      topicList = this.state.topics
-    }
+    // let topicList;
+    // if(this.state.userSearch.match.length && this.state.topics.length){
+    //   let matchText;
+    //   if(this.state.userSearch.matchRule === 'anywhere'){
+    //     matchText = this.state.userSearch.match
+    //   } else {
+    //     matchText = "^" + this.state.userSearch.match
+    //   }
+    //   const regex = new RegExp(matchText, 'gi')
+    //   topicList = this.state.topics.filter(topic => {
+    //     return !!topic[this.state.userSearch.type].match(regex)
+    //   }) 
+    // } else {
+    //   topicList = this.state.topics
+    // }
+
+    const topicList = filterTopics(this.state)
 
     return (
       <div className="App">
-        <SearchForm setUserSearch={this.setUserSearch} />
+        <SearchForm setUserSearch={this.setUserSearch} searchParams={this.state.userSearch} />
         {
           !!this.state.topics.length 
           &&

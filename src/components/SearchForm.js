@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchForm = ({ setUserSearch }) => {
+const SearchForm = ({ setUserSearch, searchParams }) => {
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -8,7 +8,8 @@ const SearchForm = ({ setUserSearch }) => {
         const type = document.getElementById('search-type').value
         const match = document.getElementById('search-text').value
 
-        setUserSearch({type, match})
+        let matchRule = document.getElementById('text-match-1').checked ? "anywhere" : "beginning"
+        setUserSearch({type, match, matchRule})
     }
 
     return(
@@ -19,7 +20,16 @@ const SearchForm = ({ setUserSearch }) => {
                     <option value="tags">Tags</option>
                     <option value="author">Author</option>
                 </select>
+                
                 <input type="text" id="search-text" placeholder="Search..."/>
+                
+                <br/>
+                <input type="radio" name="text-match" id="text-match-1" value="anywhere" checked={searchParams.matchRule === "anywhere"} />
+                <label for="text-match-1">Match anywhere in word(s)</label>
+                <br/>
+                <input type="radio" name="text-match" id="text-match-2" value="beginning" checked={searchParams.matchRule === "beginning"}/>
+                <label for="text-match-2">Match beginnings of words</label>
+
             </form>
         </div>
     )
