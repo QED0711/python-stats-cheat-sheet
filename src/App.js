@@ -12,7 +12,8 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      references: ["https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/MASTER.html"],
+      entry: "https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/REFS.txt",
+      references: [],
       topics: [],
       userSearch: {
         type: "title",
@@ -20,29 +21,41 @@ class App extends Component {
         matchRule: "anywhere"
       }
     }
-    this.setHTML = this.setHTML.bind(this);
-    this.setTopics = this.setTopics.bind(this);
+    this.setReferences = this.setReferences.bind(this);
+    this.updateTopics = this.updateTopics.bind(this);
     this.setUserSearch = this.setUserSearch.bind(this);
   }
 
   componentDidMount = () => {
-    for(let ref of this.state.references){
+    fetch(this.state.entry)
+    .then(response => {
+      return response.text()
+    })
+    .then(text => {
+
+      const refs = text.split('\n').filter(str => !!str.length)
+      
+      for(let ref of refs){
+      
         fetch(ref)
         .then((response) => {
           return response.text()
-        }).then((text) => {
+        })
+        .then((text) => {
           const topics = parseHTML(text)
-          this.setTopics(topics)
+          this.updateTopics(topics)
         })
       }
-
-    }
-
-  setHTML = (html) => {
-    this.setState({html})
+      
+    })
   }
 
-  setTopics = (topicsArr) => {
+
+  setReferences = (references) => {
+    this.setState({references})
+  }
+
+  updateTopics = (topicsArr) => {
     console.log(topicsArr)
     
     let updatedTopics = this.state.topics
@@ -60,11 +73,14 @@ class App extends Component {
 
     return (
       <div className="App">
-        <SearchForm setUserSearch={this.setUserSearch} searchParams={this.state.userSearch} />
         {
-          !!this.state.topics.length 
-          &&
-          <HTMLRenderer topics={topicList} />
+          !!this.state.topics.length ?
+          <div>
+            <SearchForm setUserSearch={this.setUserSearch} searchParams={this.state.userSearch} />
+            <HTMLRenderer topics={topicList} />
+          </div>
+          :
+          <h1>LOADING...</h1>
         }
       </div>
     );
