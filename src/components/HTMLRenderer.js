@@ -12,7 +12,13 @@ const HTMLRenderer = ({ topics }) => {
 
     return(
         <div className="main">
-            {renderTopics(topics)}
+            
+            {
+                !!topics.length ? 
+                renderTopics(topics)
+                :
+                <h1>Sorry, no matches for this search</h1>
+            }
         </div>
     )
 }

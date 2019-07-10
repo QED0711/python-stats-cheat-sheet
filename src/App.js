@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/src/MASTER.html', )
+    fetch('https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/MASTER.html', )
     .then((response) => {
       return response.text()
     }).then((text) => {
@@ -49,21 +49,6 @@ class App extends Component {
   }
   
   render = () => {
-    // let topicList;
-    // if(this.state.userSearch.match.length && this.state.topics.length){
-    //   let matchText;
-    //   if(this.state.userSearch.matchRule === 'anywhere'){
-    //     matchText = this.state.userSearch.match
-    //   } else {
-    //     matchText = "^" + this.state.userSearch.match
-    //   }
-    //   const regex = new RegExp(matchText, 'gi')
-    //   topicList = this.state.topics.filter(topic => {
-    //     return !!topic[this.state.userSearch.type].match(regex)
-    //   }) 
-    // } else {
-    //   topicList = this.state.topics
-    // }
 
     const topicList = filterTopics(this.state)
 

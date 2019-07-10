@@ -5,15 +5,30 @@ const getDomObject = (htmlString) => {
 }
 
 const getTopicTitle = (str) => {
-    return str.getElementsByTagName('h1')[0].innerText
+    const element = str.getElementsByTagName('h1')
+    if(element.length){
+        return element[0].innerText
+    } else {
+        return ""
+    }
 }
 
 const getTopicAuthor = (str) => {
-    return str.getElementsByTagName('h4')[0].innerText
+    const element = str.getElementsByTagName('h2')
+    if(element.length){
+        return element[0].innerText
+    } else {
+        return ""
+    }
 }
 
 const getTopicTags = (str) => {
-    return str.getElementsByTagName('h6')[0].innerText
+    const element = str.getElementsByTagName('h3')
+    if(element.length){
+        return element[0].innerText
+    } else {
+        return ""
+    }
 }
 
 
