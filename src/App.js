@@ -23,12 +23,11 @@ class App extends Component {
     this.setUserSearch = this.setUserSearch.bind(this);
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     fetch('https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/src/MASTER.html', )
     .then((response) => {
       return response.text()
     }).then((text) => {
-      // this.setHTML(text)
       const topics = parseHTML(text)
       this.setTopics(topics)
     })
@@ -44,7 +43,6 @@ class App extends Component {
   }
 
   setUserSearch = ({ type, match }) => {
-    console.log({type, match})
     this.setState({userSearch: {
       type,
       match
@@ -52,9 +50,15 @@ class App extends Component {
   }
   
   render = () => {
-    
-    if(this.state.html){
-      parseHTML(this.state.html, this.setTopics)
+    let topicList;
+    if(this.state.userSearch.match.length && this.state.topics.length){
+      const regex = new RegExp(this.state.userSearch.match, 'ig')
+      topicList = this.state.topics.filter(topic => {
+        // debugger
+        return !!topic[this.state.userSearch.type].match(regex)
+      }) 
+    } else {
+      topicList = this.state.topics
     }
 
     return (
@@ -63,7 +67,7 @@ class App extends Component {
         {
           !!this.state.topics.length 
           &&
-          <HTMLRenderer topics={this.state.topics} />
+          <HTMLRenderer topics={topicList} />
         }
       </div>
     );
