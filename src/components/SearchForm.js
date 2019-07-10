@@ -15,7 +15,7 @@ const SearchForm = ({ setUserSearch, searchParams }) => {
     return(
         <div>
             <form className="search-form" onChange={handleChange}>
-                <select id="search-type">
+                <select id="search-type" defaultValue="title">
                     <option value="title">Title</option>
                     <option value="tags">Tags</option>
                     <option value="author">Author</option>
