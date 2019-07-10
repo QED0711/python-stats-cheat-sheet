@@ -8,9 +8,11 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      html: null
+      html: null,
+      topics: []
     }
     this.setHTML = this.setHTML.bind(this);
+    this.setTopics = this.setTopics.bind(this);
   }
 
   componentDidMount = async () => {
@@ -25,6 +27,10 @@ class App extends Component {
   setHTML = (html) => {
     this.setState({html})
   }
+
+  setTopics = (topicsArr) => {
+    this.setState({topics: topicsArr})
+  }
   
   render = () => {
     return (
@@ -32,7 +38,7 @@ class App extends Component {
         {
           this.state.html 
           &&
-          <HTMLRenderer html={this.state.html} />
+          <HTMLRenderer html={this.state.html} topics={this.state.topics} />
         }
       </div>
     );

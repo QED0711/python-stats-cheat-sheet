@@ -1,14 +1,14 @@
 import React from 'react'
-// var parse = require('html-react-parser')
+import extractTopicInfo from "./extractTopicInfo";
 
 const parseHTML = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html")
     const cells = doc.getElementsByClassName("cell")
-    let results = [];
-    let htmlSegments = [];
     // set our current string to the innerHTML of the first cell
     // This assumes that the first cell is an h1 header 
     let str = cells[0].innerHTML
+    let domObjects = [];
+    let segments = [] 
     // initialize cell variable for use in the loop
     let cell;
     for(var i = 1; i < cells.length; i++){ // we start on the first index because we have already accounted for the first cell above
@@ -17,8 +17,8 @@ const parseHTML = (html) => {
 
         if(cell.getElementsByTagName("h1").length){ // if the cell contains an h1
             // add the whole str as the innerHTML of a JSX object 
-            htmlSegments.push(str)
-            results.push(<div key={i} className="topic-card" dangerouslySetInnerHTML={{__html: str}}></div>)
+            // domObjects.push(<div key={i} className="topic-card" dangerouslySetInnerHTML={{__html: str}}></div>)
+            segments.push(str)
             // set the string equal to the new h1 header
             str = cell.innerHTML    
         } else {
@@ -26,11 +26,14 @@ const parseHTML = (html) => {
             str += cell.innerHTML
         }
     }
-    // finally, add the last str to a new JSX object and push it to the results.
-    htmlSegments.push(str)
-    console.log(htmlSegments)
-    results.push(<div key={i} className="topic-card" dangerouslySetInnerHTML={{__html: str}}></div>)
-    return results
+    // finally, add the last str to a new JSX object and push it to the domObjects.
+    // domObjects.push(<div key={i} className="topic-card" dangerouslySetInnerHTML={{__html: str}}></div>)
+    segments.push(str)
+    
+    for(let str of segments){
+        console.log(extractTopicInfo(str));
+    }
+    // return domObjects
 }
 
 export default parseHTML
