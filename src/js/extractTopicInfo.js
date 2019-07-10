@@ -1,7 +1,7 @@
 import React from 'react';
 
 const getDomObject = (htmlString) => {
-    return <div className="topic-card" dangerouslySetInnerHTML={{__html: htmlString}}></div>
+    return <div dangerouslySetInnerHTML={{__html: htmlString}}></div>
 }
 
 const getTopicTitle = (str) => {
@@ -17,9 +17,9 @@ const extractTopicInfo = (htmlString) => {
     
     const element = getDomObject(htmlString)
     const title = getTopicTitle(str)
-    // const tags = getTopicTags(str)
+    const tags = getTopicTags(str)
 
-    return {element, title, /* tags */}
+    return {element, title, tags}
 }
 
 export default extractTopicInfo;

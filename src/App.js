@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import ReportDispatcher from 'jest-jasmine2/build/jasmine/ReportDispatcher';
-import HTMLRenderer from './components/HTMLRenderer';
 
+
+import HTMLRenderer from './components/HTMLRenderer';
+import parseHTML from './js/parseHTML';
 
 class App extends Component {
   constructor(){
@@ -20,7 +21,9 @@ class App extends Component {
     .then((response) => {
       return response.text()
     }).then((text) => {
-      this.setHTML(text)
+      // this.setHTML(text)
+      const topics = parseHTML(text)
+      this.setTopics(topics)
     })
   }
 
@@ -29,16 +32,22 @@ class App extends Component {
   }
 
   setTopics = (topicsArr) => {
+    console.log(topicsArr)
     this.setState({topics: topicsArr})
   }
   
   render = () => {
+    
+    if(this.state.html){
+      parseHTML(this.state.html, this.setTopics)
+    }
+
     return (
       <div className="App">
         {
-          this.state.html 
+          !!this.state.topics.length 
           &&
-          <HTMLRenderer html={this.state.html} topics={this.state.topics} />
+          <HTMLRenderer topics={this.state.topics} />
         }
       </div>
     );

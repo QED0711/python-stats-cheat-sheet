@@ -1,4 +1,3 @@
-import React from 'react'
 import extractTopicInfo from "./extractTopicInfo";
 
 const parseHTML = (html) => {
@@ -7,7 +6,6 @@ const parseHTML = (html) => {
     // set our current string to the innerHTML of the first cell
     // This assumes that the first cell is an h1 header 
     let str = cells[0].innerHTML
-    let domObjects = [];
     let segments = [] 
     // initialize cell variable for use in the loop
     let cell;
@@ -29,11 +27,11 @@ const parseHTML = (html) => {
     // finally, add the last str to a new JSX object and push it to the domObjects.
     // domObjects.push(<div key={i} className="topic-card" dangerouslySetInnerHTML={{__html: str}}></div>)
     segments.push(str)
-    
+    let topics = []
     for(let str of segments){
-        console.log(extractTopicInfo(str));
+        topics.push(extractTopicInfo(str));
     }
-    // return domObjects
+    return topics
 }
 
 export default parseHTML
