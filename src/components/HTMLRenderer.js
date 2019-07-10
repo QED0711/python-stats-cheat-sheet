@@ -11,7 +11,7 @@ const HTMLRenderer = ({ topics }) => {
     }
 
     return(
-        <div className="main">
+        <div className="content">
             
             {
                 !!topics.length ? 

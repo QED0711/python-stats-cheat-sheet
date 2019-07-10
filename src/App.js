@@ -12,7 +12,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      html: null,
+      references: ["https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/MASTER.html"],
       topics: [],
       userSearch: {
         type: "title",
@@ -26,14 +26,17 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/MASTER.html', )
-    .then((response) => {
-      return response.text()
-    }).then((text) => {
-      const topics = parseHTML(text)
-      this.setTopics(topics)
-    })
-  }
+    for(let ref of this.state.references){
+        fetch(ref)
+        .then((response) => {
+          return response.text()
+        }).then((text) => {
+          const topics = parseHTML(text)
+          this.setTopics(topics)
+        })
+      }
+
+    }
 
   setHTML = (html) => {
     this.setState({html})
@@ -41,7 +44,10 @@ class App extends Component {
 
   setTopics = (topicsArr) => {
     console.log(topicsArr)
-    this.setState({topics: topicsArr})
+    
+    let updatedTopics = this.state.topics
+    updatedTopics.push(...topicsArr)
+    this.setState({topics: updatedTopics})
   }
 
   setUserSearch = (searchParams) => {
