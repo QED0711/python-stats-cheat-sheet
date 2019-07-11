@@ -1,11 +1,11 @@
 import React from 'react'
 
-// import { mlabAPI } from '../keys';
+import { mlabAPI } from '../keys';
 
 import bcrypt from 'bcryptjs';
 const salt = bcrypt.genSaltSync(10)
 
-const mlabAPI = process.env.mlabAPI || "123"
+// const mlabAPI = process.env.mlabAPI || "123"
 
 const FileDrop = ({ notebooks }) => {
 
@@ -64,7 +64,6 @@ const FileDrop = ({ notebooks }) => {
         e.preventDefault()
         readFile(e.target.files[0], notebooks)
     }
-
     return (
         <form className="file-drop">
             <h3>Want to contribute?</h3>

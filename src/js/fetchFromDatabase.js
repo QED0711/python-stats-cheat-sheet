@@ -1,7 +1,7 @@
 
-// import { mlabAPI } from '../keys';
+import { mlabAPI } from '../keys';
 import parseHTML from './parseHTML';
-const mlabAPI = process.env.mlabAPI || "123"
+// const mlabAPI = process.env.mlabAPI || "123"
 
 const fetchFromDatabase = (updateTopics, setNotebooks) => {
     fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/notebooks?apiKey=${mlabAPI}`)

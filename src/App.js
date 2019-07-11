@@ -50,7 +50,7 @@ class App extends Component {
     const topicList = filterTopics(this.state)
     // console.log(this.state)
 
-    console.log(process.env)
+    // console.log(process.env)
 
     return (
       <div className="App">
