@@ -9,12 +9,19 @@ const FileDrop = () => {
         const reader = new FileReader()
         
         reader.onload = (e) => {
-            const html = parseHTML(reader.result)
+            // const html = parseHTML(reader.result)
             // const json = JSON.stringify(reader.result)
             // console.log(html.rawString)
+            const fileInfo = file
+            // debugger
             window.$.ajax({
                 url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/notebooks?apiKey=${mlabAPI}`,
-                data: JSON.stringify(html[0].rawString),
+                data: JSON.stringify({
+                    _id: {$oid: "5d26fb535d0e65501b61dbe1"},
+                    name: fileInfo.name,
+                    modified: fileInfo.lastModified, 
+                    html: reader.result
+                }),
                 type: "POST",
                 contentType: "application/json"
             })

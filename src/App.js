@@ -16,6 +16,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
+      notebooks: null,
       entry: "https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/REFS.txt",
       references: [],
       topics: [],
@@ -25,35 +26,42 @@ class App extends Component {
         matchRule: "anywhere"
       }
     }
+    this.setNotebooks = this.setNotebooks.bind(this);
     this.setReferences = this.setReferences.bind(this);
     this.updateTopics = this.updateTopics.bind(this);
     this.setUserSearch = this.setUserSearch.bind(this);
   }
 
-  componentDidMount = () => {
-    fetch(this.state.entry)
-    .then(response => {
-      return response.text()
-    })
-    .then(text => {
+  componentDidMount = async () => {
 
-      const refs = text.split('\n').filter(str => !!str.length)
+    fetchFromDatabase(this.updateTopics, this.setNotebooks)
+
+    // fetch(this.state.entry)
+    // .then(response => {
+    //   return response.text()
+    // })
+    // .then(text => {
+
+    //   const refs = text.split('\n').filter(str => !!str.length)
       
-      for(let ref of refs){
+    //   for(let ref of refs){
       
-        fetch(ref)
-        .then((response) => {
-          return response.text()
-        })
-        .then((text) => {
-          const topics = parseHTML(text)
-          this.updateTopics(topics)
-        })
-      }
+    //     fetch(ref)
+    //     .then((response) => {
+    //       return response.text()
+    //     })
+    //     .then((text) => {
+    //       const topics = parseHTML(text)
+    //       this.updateTopics(topics)
+    //     })
+    //   }
       
-    })
+    // })
   }
 
+  setNotebooks = (notebooks) => {
+    this.setState({notebooks});
+  }
 
   setReferences = (references) => {
     this.setState({references})
@@ -72,9 +80,9 @@ class App extends Component {
   }
   
   render = () => {
-    fetchFromDatabase()
+    // fetchFromDatabase(this.setNotebooks)
     const topicList = filterTopics(this.state)
-    console.log(topicList)
+    console.log(this.state)
 
     return (
       <div className="App">
