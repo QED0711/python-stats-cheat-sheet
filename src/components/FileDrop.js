@@ -13,6 +13,7 @@ const FileDrop = ({ notebooks }) => {
             const fileInfo = file
             const nbs = notebooks
 
+            // set our base data object - this is what we will send to the database
             const data = {name: fileInfo.name, modified: fileInfo.lastModified, html: reader.result}
 
             for(let nb of nbs){
@@ -22,12 +23,12 @@ const FileDrop = ({ notebooks }) => {
                 }
             }
 
-            // debugger
             window.$.ajax({
                 url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/notebooks?apiKey=${mlabAPI}`,
                 data: JSON.stringify(data),
                 type: "POST",
-                contentType: "application/json"
+                contentType: "application/json",
+                success: () => {window.location.reload()},
             })
         } 
         

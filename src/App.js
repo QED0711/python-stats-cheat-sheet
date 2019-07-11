@@ -5,11 +5,9 @@ import './App.css';
 import HTMLRenderer from './components/HTMLRenderer';
 import SearchForm from './components/SearchForm';
 
-import parseHTML from './js/parseHTML';
 import filterTopics from './js/filterTopics';
 import FileDrop from './components/FileDrop';
 
-import { mlabAPI } from './keys';
 import fetchFromDatabase from './js/fetchFromDatabase';
 
 class App extends Component {
