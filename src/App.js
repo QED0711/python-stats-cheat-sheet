@@ -9,6 +9,7 @@ import filterTopics from './js/filterTopics';
 import FileDrop from './components/FileDrop';
 
 import fetchFromDatabase from './js/fetchFromDatabase';
+import ContentContainer from './components/ContentContainer';
 
 class App extends Component {
   constructor(){
@@ -48,9 +49,7 @@ class App extends Component {
   render = () => {
     // fetchFromDatabase(this.setNotebooks)
     const topicList = filterTopics(this.state)
-    // console.log(this.state)
-
-    // console.log(process.env)
+    const activeSearch = this.state.userSearch.match !== ""
 
     return (
       <div className="App">
@@ -61,7 +60,7 @@ class App extends Component {
           !!this.state.topics.length ?
           <div>
             <SearchForm setUserSearch={this.setUserSearch} searchParams={this.state.userSearch} />
-            <HTMLRenderer topics={topicList} />
+            <ContentContainer topics={topicList} activeSearch={activeSearch} setUserSearch={this.setUserSearch} />
           </div>
           :
           <h1>LOADING...</h1>

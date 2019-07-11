@@ -16,13 +16,13 @@ const SearchForm = ({ setUserSearch, searchParams }) => {
         <div>
             <form className="search-form" onChange={handleChange} onSubmit={e => {e.preventDefault()}}>
                 Search By  
-                <select id="search-type" defaultValue="title">
+                <select id="search-type" value={searchParams.type}>
                     <option value="title">Title</option>
                     <option value="tags">Tags</option>
                     <option value="author">Author</option>
                 </select>
                 <br/>
-                <input type="text" id="search-text" placeholder="Search..."/>
+                <input type="text" id="search-text" value={searchParams.match} placeholder="Search..."/>
                 
                 <br/>
                 <input type="radio" name="text-match" id="text-match-1" value="anywhere" checked={searchParams.matchRule === "anywhere"} />
