@@ -1,31 +1,51 @@
 import React from 'react'
 
 import { mlabAPI } from '../keys';
-// import parseHTML from '../js/parseHTML';
+
+import bcrypt from 'bcryptjs';
+import { access } from 'fs';
+const salt = bcrypt.genSaltSync(10)
+
 
 const FileDrop = ({ notebooks }) => {
-    
+
     const readFile = (file, notebooks) => {
         const reader = new FileReader()
         
-        reader.onload = (e) => {
+        reader.onload = async (e) => {
             // pull in data from outer scope
             const fileInfo = file
             const nbs = notebooks
 
             // set our base data object - this is what we will send to the database
             const data = {name: fileInfo.name, modified: fileInfo.lastModified, html: reader.result}
-
+            let overwrite = false;
+            // const hash = bcrypt.hashSync("B4c0/\/", salt)
             for(let nb of nbs){
+                // if the file name already is in our database
                 if(nb.name === fileInfo.name){
-                    const overwrite = window.confirm("There is already a file with this name. Loading this file will overwrite the previous version. Are you sure you want to do this?")
-                    if(overwrite){
+                    const hash = nb.hash || "567"
+                    
+                    const accessCode = window.prompt("A file already exists with this name. Uploading this file will overwrite the previous version. \n\nIf you are the author of this file and would like to update it, enter the password you used when you originally uploaded the file and submit.")
+                    
+                    if(accessCode && accessCode !== ""){
+                        var authorization = await bcrypt.compare(accessCode, hash)
+                        overwrite = true
+                    }
+
+                    if(authorization){
                         data._id = {$oid: nb._id.$oid}
                         break
                     } else {
+                        window.alert("Sorry, you do not have access rights to update this file.")
                         window.location.reload()
                     }
                 }
+            }
+            // if we're not updating an existing entry, add password protection to the new entry
+            if(!overwrite){
+                const accessCode = window.prompt("You are about to upload a new file. Please password protect it so you can update it at a later time")
+                data.hash = bcrypt.hashSync(accessCode, bcrypt.genSaltSync(10))
             }
 
             window.$.ajax({
