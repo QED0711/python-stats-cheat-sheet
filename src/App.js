@@ -52,11 +52,13 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1>Jupyter Notecards</h1>
+        <h4><em>A fast and simple way for you and your friends to combine your jupyter notebooks.</em></h4>
+        <FileDrop notebooks={this.state.notebooks} />
         {
           !!this.state.topics.length ?
           <div>
             <SearchForm setUserSearch={this.setUserSearch} searchParams={this.state.userSearch} />
-            <FileDrop notebooks={this.state.notebooks} />
             <HTMLRenderer topics={topicList} />
           </div>
           :
