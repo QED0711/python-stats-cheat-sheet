@@ -7,6 +7,9 @@ import SearchForm from './components/SearchForm';
 
 import parseHTML from './js/parseHTML';
 import filterTopics from './js/filterTopics';
+import FileDrop from './components/FileDrop';
+
+import { mlabAPI } from './keys';
 
 class App extends Component {
   constructor(){
@@ -77,6 +80,7 @@ class App extends Component {
           !!this.state.topics.length ?
           <div>
             <SearchForm setUserSearch={this.setUserSearch} searchParams={this.state.userSearch} />
+            <FileDrop />
             <HTMLRenderer topics={topicList} />
           </div>
           :
