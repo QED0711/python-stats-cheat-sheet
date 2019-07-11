@@ -10,6 +10,7 @@ import filterTopics from './js/filterTopics';
 import FileDrop from './components/FileDrop';
 
 import { mlabAPI } from './keys';
+import fetchFromDatabase from './js/fetchFromDatabase';
 
 class App extends Component {
   constructor(){
@@ -71,8 +72,9 @@ class App extends Component {
   }
   
   render = () => {
-
+    fetchFromDatabase()
     const topicList = filterTopics(this.state)
+    console.log(topicList)
 
     return (
       <div className="App">

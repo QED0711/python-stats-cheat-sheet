@@ -25,7 +25,6 @@ const parseHTML = (html) => {
         }
     }
     // finally, add the last str to a new JSX object and push it to the domObjects.
-    // domObjects.push(<div key={i} className="topic-card" dangerouslySetInnerHTML={{__html: str}}></div>)
     segments.push(str)
     let topics = []
     for(let str of segments){
