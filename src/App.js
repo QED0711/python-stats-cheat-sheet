@@ -50,6 +50,8 @@ class App extends Component {
     const topicList = filterTopics(this.state)
     // console.log(this.state)
 
+    console.log(process.env)
+
     return (
       <div className="App">
         <h1>Jupyter Notecards</h1>

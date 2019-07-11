@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { mlabAPI } from '../keys';
+// import { mlabAPI } from '../keys';
 
 import bcrypt from 'bcryptjs';
-import { access } from 'fs';
 const salt = bcrypt.genSaltSync(10)
 
+const mlabAPI = process.env.mlabAPI || "123"
 
 const FileDrop = ({ notebooks }) => {
 
@@ -45,7 +45,7 @@ const FileDrop = ({ notebooks }) => {
             // if we're not updating an existing entry, add password protection to the new entry
             if (!overwrite) {
                 const accessCode = window.prompt("You are about to upload a new file. Please password protect it so you can update it at a later time")
-                data.hash = bcrypt.hashSync(accessCode, await bcrypt.genSalt(10))
+                data.hash = bcrypt.hashSync(accessCode, salt)
             }
 
             window.$.ajax({
@@ -69,7 +69,7 @@ const FileDrop = ({ notebooks }) => {
         <form className="file-drop">
             <h3>Want to contribute?</h3>
             <p>Users are welcome and encouraged to contribute their own notes so we can expand upon this knowledge base. </p>
-            <p>For information on how to format and save your jupyter notebooks, read the <a href="#">docs</a> for this project.</p>
+            <p>For information on how to format and save your jupyter notebooks, read the <a href="https://github.com/QED0711/python-stats-cheat-sheet/blob/master/README.md" target="_blank">docs</a> for this project.</p>
             <hr />
             <p>When ready to submit, select and upload your html file by clicking the button below.</p>
             <input id="file" type="file" onChange={handleFile} />
