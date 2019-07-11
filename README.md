@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Jupyter Notecards
 
-## Available Scripts
+***
 
-In the project directory, you can run:
+## Outline
 
-### `npm start`
+This project allows users to upload and share their jupyter notebooks to a central repository. Notebooks are parsed to make topics easily searchable. Each topic is saved as an individual notecard. The goal is to have a single location where aspiring data scientists can come and search a general knowledge base. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Contributing
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+All users are welcome and encouraged to contribute their own notebooks to this project to grow the knowledge base. To do so, follow the guidlines set forth below. 
 
-### `npm test`
+### Notebook Format
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+When creating your notebook, you must follow certain formatting guidlines so this site can accuratly parse the information.  
 
-### `npm run build`
+1. Each topic entry MUST start with a single h1 heading in a markdown cell. This is accomplished bycreating a markdown cell and writing a single hashtag (#) heading. H1 headings indicate the start of a new topic. Because of this, there may be one and only one h1 heading per topic.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. You may optionally add your name as author and a list of tags to each topic. The first h2 heading in a topic will be read as the author name. The first h3 heading will be read as a list of tags. Unlike with the h1 heading, you can have multiple h2 and h3 headings in a topic entry. 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+3. Anything following this initial setup will be read as the main body of the notecard. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Saving & Submitting
 
-### `npm run eject`
+When you ready to submit your notebook, you must follow these two steps. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Download your notebook as HTML. To do this, go to file => Download as => HTML (.html)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. On the jupyter notecards website, upload the newly created HTML file via the "Choose File" button at the top of the page. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Note: You can update any file by simply uploading an HTML file of the same name. When updating, you will be asked to confirm the overwrite of your previous version. 
