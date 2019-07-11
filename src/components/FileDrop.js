@@ -18,8 +18,13 @@ const FileDrop = ({ notebooks }) => {
 
             for(let nb of nbs){
                 if(nb.name === fileInfo.name){
-                    data._id = {$oid: nb._id.$oid}
-                    break
+                    const overwrite = window.confirm("There is already a file with this name. Loading this file will overwrite the previous version. Are you sure you want to do this?")
+                    if(overwrite){
+                        data._id = {$oid: nb._id.$oid}
+                        break
+                    } else {
+                        window.location.reload()
+                    }
                 }
             }
 
