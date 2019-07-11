@@ -17,8 +17,6 @@ class App extends Component {
     super()
     this.state = {
       notebooks: null,
-      entry: "https://raw.githubusercontent.com/QED0711/python-stats-cheat-sheet/master/REFS.txt",
-      references: [],
       topics: [],
       userSearch: {
         type: "title",
@@ -27,49 +25,19 @@ class App extends Component {
       }
     }
     this.setNotebooks = this.setNotebooks.bind(this);
-    this.setReferences = this.setReferences.bind(this);
     this.updateTopics = this.updateTopics.bind(this);
     this.setUserSearch = this.setUserSearch.bind(this);
   }
 
   componentDidMount = async () => {
-
     fetchFromDatabase(this.updateTopics, this.setNotebooks)
-
-    // fetch(this.state.entry)
-    // .then(response => {
-    //   return response.text()
-    // })
-    // .then(text => {
-
-    //   const refs = text.split('\n').filter(str => !!str.length)
-      
-    //   for(let ref of refs){
-      
-    //     fetch(ref)
-    //     .then((response) => {
-    //       return response.text()
-    //     })
-    //     .then((text) => {
-    //       const topics = parseHTML(text)
-    //       this.updateTopics(topics)
-    //     })
-    //   }
-      
-    // })
   }
 
   setNotebooks = (notebooks) => {
     this.setState({notebooks});
   }
 
-  setReferences = (references) => {
-    this.setState({references})
-  }
-
   updateTopics = (topicsArr) => {
-    console.log(topicsArr)
-    
     let updatedTopics = this.state.topics
     updatedTopics.push(...topicsArr)
     this.setState({topics: updatedTopics})
@@ -82,7 +50,7 @@ class App extends Component {
   render = () => {
     // fetchFromDatabase(this.setNotebooks)
     const topicList = filterTopics(this.state)
-    console.log(this.state)
+    // console.log(this.state)
 
     return (
       <div className="App">
@@ -90,7 +58,7 @@ class App extends Component {
           !!this.state.topics.length ?
           <div>
             <SearchForm setUserSearch={this.setUserSearch} searchParams={this.state.userSearch} />
-            <FileDrop />
+            <FileDrop notebooks={this.state.notebooks} />
             <HTMLRenderer topics={topicList} />
           </div>
           :
