@@ -14,7 +14,10 @@ const SearchForm = ({ setUserSearch, searchParams }) => {
 
     return(
         <div>
-            <form className="search-form" onChange={handleChange} onSubmit={e => {e.preventDefault()}}>
+            <form className="search-form" onChange={handleChange} onSubmit={e => {
+                    e.preventDefault()
+                    setUserSearch({type: "title", match: "", matchRule: "anywhere"})
+                }}>
                 Search By  
                 <select id="search-type" value={searchParams.type}>
                     <option value="title">Title</option>
@@ -30,7 +33,8 @@ const SearchForm = ({ setUserSearch, searchParams }) => {
                 <br/>
                 <input type="radio" name="text-match" id="text-match-2" value="beginning" checked={searchParams.matchRule === "beginning"}/>
                 <label for="text-match-2">Match beginnings of word(s)</label>
-
+                <br/>
+                <input type="submit" value="reset"/>
             </form>
         </div>
     )
