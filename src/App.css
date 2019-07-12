@@ -67,17 +67,19 @@
   margin: 1em auto;
 }
 
-.title-card{
+.tile{
   display: inline;
   padding: 4px;
   margin: 0.5em;
   background-color: rgb(204, 204, 204);
   border-radius: 5px;
+  box-sizing: border-box;
   
   cursor: pointer;
+  overflow-wrap: break-word;
 }
 
-.title-card:hover{
+.tile:hover{
   animation-name: hover-emphasis;
   animation-duration: 0.2s;
   animation-fill-mode: forwards;

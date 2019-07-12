@@ -12,7 +12,7 @@ const TitleTiles = ({ topics, setUserSearch }) => {
         const titles = topics.map(x => x.title.replace("¶", "")).sort()
         return titles.map((title, i) => {
             return(
-                <div key={i} className="title-card" onClick={handleTileClick(title)}>
+                <div key={i} className="tile" onClick={handleTileClick(title)}>
                     {title}
                 </div>
             ) 
