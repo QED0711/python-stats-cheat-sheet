@@ -4,7 +4,6 @@ import HTMLRenderer from './HTMLRenderer';
 import TitleTiles from './TitleTiles';
 
 const ContentContainer = ({ topics, activeSearch, setUserSearch }) => {
-    console.log(activeSearch)
     return(
         <div className="container">
             {

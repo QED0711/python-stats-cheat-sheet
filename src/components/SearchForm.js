@@ -34,7 +34,7 @@ const SearchForm = ({ setUserSearch, searchParams }) => {
                 <input type="radio" name="text-match" id="text-match-2" value="beginning" checked={searchParams.matchRule === "beginning"}/>
                 <label for="text-match-2">Match beginnings of word(s)</label>
                 <br/>
-                <input type="submit" value="reset"/>
+                <input type="submit" value="   clear   "/>
             </form>
         </div>
     )

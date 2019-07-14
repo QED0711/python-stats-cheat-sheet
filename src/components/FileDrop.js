@@ -16,7 +16,12 @@ const FileDrop = ({ notebooks }) => {
             // pull in data from outer scope
             const fileInfo = file
             const nbs = notebooks
-
+            // check to make sure the submission is an html file
+            if(fileInfo.type !== "text/html"){
+                window.alert("This file type is not compatible. Please only submit HTML files.");
+                window.location.reload()
+                return
+            }
             // set our base data object - this is what we will send to the database
             const data = { name: fileInfo.name, modified: fileInfo.lastModified, html: reader.result }
             let overwrite = false;

@@ -68,7 +68,7 @@
 }
 
 .tile{
-  display: inline;
+  display: inline-block;
   padding: 4px;
   margin: 0.5em;
   background-color: rgb(204, 204, 204);
