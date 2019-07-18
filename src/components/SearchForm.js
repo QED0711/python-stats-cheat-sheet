@@ -23,17 +23,23 @@ const SearchForm = ({ setUserSearch, searchParams }) => {
                     <option value="title">Title</option>
                     <option value="tags">Tags</option>
                     <option value="author">Author</option>
+                    <option value="rawString">Content Body</option>
                 </select>
                 <br/>
                 <input type="text" id="search-text" value={searchParams.match} placeholder="Search..."/>
                 
                 <br/>
+
                 <input type="radio" name="text-match" id="text-match-1" value="anywhere" checked={searchParams.matchRule === "anywhere"} />
                 <label for="text-match-1">Match anywhere in word(s)</label>
+                
                 <br/>
+
                 <input type="radio" name="text-match" id="text-match-2" value="beginning" checked={searchParams.matchRule === "beginning"}/>
                 <label for="text-match-2">Match beginnings of word(s)</label>
+
                 <br/>
+
                 <input type="submit" value="   clear   "/>
             </form>
         </div>
