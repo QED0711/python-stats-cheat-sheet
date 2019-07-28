@@ -65,6 +65,7 @@ const FileDrop = ({ notebooks }) => {
             // set a foreign key for the topics so they can reference the correct notebook
             const topicsObj = {
                 _id: data._id,
+                notebookName: fileInfo.name,
                 topics: topics,
             }
 
