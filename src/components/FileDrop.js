@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { mlabAPI, notebookCollection, developmentCollection } from '../keys';
+import { mlabAPI, currentNotebookCollection, currentTopicsCollection } from '../keys';
 import parseHTML from '../js/parseHTML'
 import getTopicsFromHTML from '../js/getTopicsFromHTML';
 
@@ -70,14 +70,14 @@ const FileDrop = ({ notebooks }) => {
 
 
             window.$.ajax({
-                url:`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/testTopics?apiKey=${mlabAPI}`,
+                url:`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentTopicsCollection}?apiKey=${mlabAPI}`,
                 data: JSON.stringify(topicsObj),
                 type: "POST",
                 contentType: "application/json",
                 success: () => {
                     // once topics have been saved, send the full data object
                     window.$.ajax({
-                        url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${developmentCollection}?apiKey=${mlabAPI}`,
+                        url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentNotebookCollection}?apiKey=${mlabAPI}`,
                         data: JSON.stringify(data),
                         type: "POST",
                         contentType: "application/json",

@@ -6,7 +6,7 @@ import SearchForm from './components/SearchForm';
 import filterTopics from './js/filterTopics';
 import FileDrop from './components/FileDrop';
 
-import fetchFromDatabase from './js/fetchFromDatabase';
+import { fetchContentFromDB, fetchTopicsFromDB } from './js/fetchFromDatabase';
 import ContentContainer from './components/ContentContainer';
 
 class App extends Component {
@@ -23,17 +23,22 @@ class App extends Component {
       currentTopic: null
     }
     this.setNotebooks = this.setNotebooks.bind(this);
-    this.updateTopics = this.updateTopics.bind(this);
+    // this.updateTopics = this.updateTopics.bind(this);
+    this.setTopics = this.setTopics.bind(this);
     this.setUserSearch = this.setUserSearch.bind(this);
     this.setCurrentTopic = this.setCurrentTopic.bind(this);
   }
 
   componentDidMount = async () => {
-    fetchFromDatabase(this.updateTopics, this.setNotebooks)
+    fetchTopicsFromDB(this.setTopics)
   }
 
   setNotebooks = (notebooks) => {
     this.setState({notebooks});
+  }
+
+  setTopics = (topics) => {
+    this.setState({topics})
   }
 
   updateTopics = (topics) => {

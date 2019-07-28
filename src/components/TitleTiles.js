@@ -2,19 +2,17 @@ import React from 'react'
 
 const TitleTiles = ({ topics, setUserSearch, setCurrentTopic }) => {
     
-    const handleTileClick = (title) => {
+    const handleTileClick = (notebookID) => {
         return () => {
-            setCurrentTopic(["Hello World"])
-            // setUserSearch({type: "title", match: title, matchRule: "anywhere"})
+            setCurrentTopic(notebookID)
         }
     }
 
     const tiles = (topics) => {
-        const titles = topics.map(x => x.title.replace("¶", "")).sort()
-        return titles.map((title, i) => {
+        return topics.map((topic, i) => {
             return(
-                <div key={i} className="tile" onClick={handleTileClick(title)}>
-                    {title}
+                <div key={i} className="tile" onClick={handleTileClick(topic.nbID)}>
+                    {topic.title}
                 </div>
             ) 
         })

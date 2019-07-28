@@ -1,9 +1,9 @@
 
-import { mlabAPI, notebookCollection, developmentCollection } from '../keys';
+import { mlabAPI, currentNotebookCollection, currentTopicsCollection } from '../keys';
 // import parseHTML from './parseHTML'; DEPRECEATED
 
-const fetchFromDatabase = (updateTopics, setNotebooks) => {
-    fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${developmentCollection}?apiKey=${mlabAPI}`)
+const fetchContentFromDB = (updateTopics, setNotebooks) => {
+    fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentNotebookCollection}?apiKey=${mlabAPI}`)
     .then(response => {
         return response.json()
     })
@@ -22,4 +22,17 @@ const fetchFromDatabase = (updateTopics, setNotebooks) => {
     })
 }
 
-export default fetchFromDatabase;
+const fetchTopicsFromDB = (setTopics) => {
+    fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentTopicsCollection}?apiKey=${mlabAPI}`)
+    .then(response => {
+        return response.json()
+    })
+    .then(json => {
+        setTopics(json)
+    })
+}
+
+export {
+    fetchContentFromDB,
+    fetchTopicsFromDB
+};

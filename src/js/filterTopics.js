@@ -1,6 +1,6 @@
 
 const filterTopics = (state) => {
-    let topicList;
+    let topicList = []
     
     if(state.userSearch.match.length && state.topics.length){
     //   Setup regex match text (beginning or entire string search)
@@ -14,12 +14,20 @@ const filterTopics = (state) => {
       const regex = new RegExp(matchText, 'gi')
     //   filter topics
     
-      topicList = state.topics.filter(topic => {
-        // debugger
-        return !!topic[state.userSearch.type].match(regex)
-      }) 
+      state.topics.forEach(notebook => {
+        for(let topic of notebook.topics ){
+          if(topic[state.userSearch.type].match(regex)){
+            topicList.push(topic.title)
+          }
+        }
+      })
+
     } else {
-      topicList = state.topics
+      topicList = state.topics.map(notebook => {
+        return notebook.topics.map(t => {
+          return {title: t.title, nbID: notebook._id}
+        })
+      }).flat()
     }
     
     return topicList
