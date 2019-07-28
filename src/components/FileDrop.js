@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { mlabAPI } from '../keys';
+import { mlabAPI, notebookCollection, developmentCollection } from '../keys';
 import parseHTML from '../js/parseHTML'
 
 import bcrypt from 'bcryptjs';
@@ -56,7 +56,7 @@ const FileDrop = ({ notebooks }) => {
             }
 
             window.$.ajax({
-                url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/test?apiKey=${mlabAPI}`,
+                url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${developmentCollection}?apiKey=${mlabAPI}`,
                 data: JSON.stringify(data),
                 type: "POST",
                 contentType: "application/json",

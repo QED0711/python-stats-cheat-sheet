@@ -1,9 +1,9 @@
 
-import { mlabAPI } from '../keys';
+import { mlabAPI, notebookCollection, developmentCollection } from '../keys';
 // import parseHTML from './parseHTML'; DEPRECEATED
 
 const fetchFromDatabase = (updateTopics, setNotebooks) => {
-    fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/test?apiKey=${mlabAPI}`)
+    fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${developmentCollection}?apiKey=${mlabAPI}`)
     .then(response => {
         return response.json()
     })
