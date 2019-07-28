@@ -13,6 +13,9 @@ const fetchFromDatabase = (updateTopics, setNotebooks) => {
         setNotebooks(json)
         // update topics in state with newly fetch data
         const topics = json.map(notebook => {
+            for(let nb of notebook.html){
+                nb.notebookID = notebook._id.$oid
+            }
             return notebook.html
         })
         updateTopics(topics.flat())

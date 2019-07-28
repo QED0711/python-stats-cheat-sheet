@@ -19,11 +19,13 @@ class App extends Component {
         type: "title",
         match: "",
         matchRule: "anywhere"
-      }
+      },
+      currentTopic: null
     }
     this.setNotebooks = this.setNotebooks.bind(this);
     this.updateTopics = this.updateTopics.bind(this);
     this.setUserSearch = this.setUserSearch.bind(this);
+    this.setCurrentTopic = this.setCurrentTopic.bind(this);
   }
 
   componentDidMount = async () => {
@@ -43,6 +45,11 @@ class App extends Component {
   setUserSearch = (searchParams) => {
     this.setState({userSearch: searchParams})
   }
+
+  setCurrentTopic = (topic) => {
+    console.log(topic)
+    this.setState({currentTopic: topic})
+  }
   
   render = () => {
     // fetchFromDatabase(this.setNotebooks)
@@ -58,7 +65,7 @@ class App extends Component {
           !!this.state.topics.length ?
           <div>
             <SearchForm setUserSearch={this.setUserSearch} searchParams={this.state.userSearch} />
-            <ContentContainer topics={topicList} activeSearch={activeSearch} setUserSearch={this.setUserSearch} />
+            <ContentContainer topics={topicList} activeSearch={activeSearch} setUserSearch={this.setUserSearch} setCurrentTopic={this.setCurrentTopic}/>
           </div>
           :
           <h1>LOADING...</h1>

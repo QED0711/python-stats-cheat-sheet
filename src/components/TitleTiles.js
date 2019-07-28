@@ -1,10 +1,11 @@
 import React from 'react'
 
-const TitleTiles = ({ topics, setUserSearch }) => {
+const TitleTiles = ({ topics, setUserSearch, setCurrentTopic }) => {
     
     const handleTileClick = (title) => {
         return () => {
-            setUserSearch({type: "title", match: title, matchRule: "anywhere"})
+            setCurrentTopic(["Hello World"])
+            // setUserSearch({type: "title", match: title, matchRule: "anywhere"})
         }
     }
 

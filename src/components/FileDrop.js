@@ -2,6 +2,8 @@ import React from 'react'
 
 import { mlabAPI, notebookCollection, developmentCollection } from '../keys';
 import parseHTML from '../js/parseHTML'
+import getTopicsFromHTML from '../js/getTopicsFromHTML';
+
 
 import bcrypt from 'bcryptjs';
 const salt = bcrypt.genSaltSync(10)
@@ -12,12 +14,12 @@ const FileDrop = ({ notebooks }) => {
 
     const readFile = (file, notebooks) => {
         const reader = new FileReader()
-        // debugger
+
         reader.onload = async (e) => {
             // pull in data from outer scope
             const fileInfo = file
             const nbs = notebooks
-            console.log(parseHTML(reader.result))
+            
             // check to make sure the submission is an html file
             if(fileInfo.type !== "text/html"){
                 window.alert("This file type is not compatible. Please only submit HTML files.");
@@ -40,7 +42,7 @@ const FileDrop = ({ notebooks }) => {
                     }
 
                     if (authorized) { // if user presents correct credentials, set the id and hash to update the data
-                        data._id = { $oid: nb._id.$oid }
+                        data._id = nb._id
                         data.hash = hash
                         break
                     } else {
@@ -53,15 +55,39 @@ const FileDrop = ({ notebooks }) => {
             if (!overwrite) {
                 const accessCode = window.prompt("You are about to upload a new file. Please password protect it so you can update it at a later time")
                 data.hash = bcrypt.hashSync(accessCode, salt)
+                // Provide a unique ID based on time when saving a new tile
+                data._id = new Date().getTime()
             }
 
+            // get topics from submitted html
+            const topics = getTopicsFromHTML(reader.result)
+
+            // set a foreign key for the topics so they can reference the correct notebook
+            const topicsObj = {
+                _id: data._id,
+                topics: topics,
+            }
+
+
             window.$.ajax({
-                url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${developmentCollection}?apiKey=${mlabAPI}`,
-                data: JSON.stringify(data),
+                url:`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/testTopics?apiKey=${mlabAPI}`,
+                data: JSON.stringify(topicsObj),
                 type: "POST",
                 contentType: "application/json",
-                success: () => { window.location.reload() },
+                success: () => {
+                    // once topics have been saved, send the full data object
+                    window.$.ajax({
+                        url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${developmentCollection}?apiKey=${mlabAPI}`,
+                        data: JSON.stringify(data),
+                        type: "POST",
+                        contentType: "application/json",
+                        success: () => { window.location.reload() },
+                    })
+
+                },
             })
+
+
         }
 
         reader.readAsText(file)
