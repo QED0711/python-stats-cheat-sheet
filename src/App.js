@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
-import HTMLRenderer from './components/HTMLRenderer';
 import SearchForm from './components/SearchForm';
 
 import filterTopics from './js/filterTopics';

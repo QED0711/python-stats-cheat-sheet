@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { mlabAPI } from '../keys';
+import parseHTML from '../js/parseHTML'
 
 import bcrypt from 'bcryptjs';
 const salt = bcrypt.genSaltSync(10)
@@ -11,11 +12,12 @@ const FileDrop = ({ notebooks }) => {
 
     const readFile = (file, notebooks) => {
         const reader = new FileReader()
-
+        // debugger
         reader.onload = async (e) => {
             // pull in data from outer scope
             const fileInfo = file
             const nbs = notebooks
+            console.log(parseHTML(reader.result))
             // check to make sure the submission is an html file
             if(fileInfo.type !== "text/html"){
                 window.alert("This file type is not compatible. Please only submit HTML files.");
@@ -23,9 +25,9 @@ const FileDrop = ({ notebooks }) => {
                 return
             }
             // set our base data object - this is what we will send to the database
+            
             const data = { name: fileInfo.name, modified: fileInfo.lastModified, html: reader.result }
             let overwrite = false;
-            // const hash = bcrypt.hashSync("B4c0/\/", salt)
             for (let nb of nbs) {
                 // if the file name already is in our database
                 if (nb.name === fileInfo.name) {
@@ -58,7 +60,7 @@ const FileDrop = ({ notebooks }) => {
                 data: JSON.stringify(data),
                 type: "POST",
                 contentType: "application/json",
-                success: () => { window.location.reload() },
+                // success: () => { window.location.reload() },
             })
         }
 
