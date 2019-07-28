@@ -36,12 +36,12 @@ const extractTopicInfo = (htmlString) => {
     const str = new DOMParser().parseFromString(htmlString, "text/html")
     
     const rawString = htmlString
-    const element = getDomObject(htmlString)
+    // const element = getDomObject(htmlString) DEPRECATED
     const title = getTopicTitle(str)
     const author = getTopicAuthor(str)
     const tags = getTopicTags(str)
 
-    return {rawString, element, title, author, tags}
+    return {rawString, title, author, tags}
 }
 
 export default extractTopicInfo;

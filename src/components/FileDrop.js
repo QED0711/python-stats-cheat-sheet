@@ -26,7 +26,7 @@ const FileDrop = ({ notebooks }) => {
             }
             // set our base data object - this is what we will send to the database
             
-            const data = { name: fileInfo.name, modified: fileInfo.lastModified, html: reader.result }
+            const data = { name: fileInfo.name, modified: fileInfo.lastModified, html: parseHTML(reader.result) }
             let overwrite = false;
             for (let nb of nbs) {
                 // if the file name already is in our database
@@ -56,11 +56,11 @@ const FileDrop = ({ notebooks }) => {
             }
 
             window.$.ajax({
-                url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/notebooks?apiKey=${mlabAPI}`,
+                url: `https://api.mlab.com/api/1/databases/jupyter-notecards/collections/test?apiKey=${mlabAPI}`,
                 data: JSON.stringify(data),
                 type: "POST",
                 contentType: "application/json",
-                // success: () => { window.location.reload() },
+                success: () => { window.location.reload() },
             })
         }
 

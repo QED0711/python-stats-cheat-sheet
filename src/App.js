@@ -34,10 +34,10 @@ class App extends Component {
     this.setState({notebooks});
   }
 
-  updateTopics = (topicsArr) => {
-    let updatedTopics = this.state.topics
-    updatedTopics.push(...topicsArr)
-    this.setState({topics: updatedTopics})
+  updateTopics = (topics) => {
+    // let updatedTopics = this.state.topics
+    // updatedTopics.push(...topicsArr)
+    this.setState({topics})
   }
 
   setUserSearch = (searchParams) => {
