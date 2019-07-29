@@ -3,10 +3,12 @@ import { get } from "http";
 // import React from 'react'
 
 const getTagsSibling = (e) => {
+
     if(e.nextElementSibling.tagName == "H3"){
         return e.nextElementSibling.innerText.replace("¶", "")
     }
     return getTagsSibling(e.nextElementSibling)
+    
 }
 
 const getTopicsFromHTML = (html) => {
