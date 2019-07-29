@@ -1,22 +1,18 @@
 import React from 'react';
 
-const HTMLRenderer = ({ topics }) => {
-    const renderTopics = (topics) => {
-        return topics.map((topic, i) => {
-            return <div key={i} className="topic-card" dangerouslySetInnerHTML={{__html: topic.rawString}}></div>
-
-        })
-    }
+const HTMLRenderer = ({ displayTopic }) => {
 
     return(
-        <div className="cards">
-            
+        <div>
             {
-                !!topics.length ? 
-                renderTopics(topics)
+                displayTopic === 'loading' ?
+                <h1>Loading...</h1>
                 :
-                <h1>Sorry, no matches for this search</h1>
+                <div className="cards">
+                    <div className="topic-card" dangerouslySetInnerHTML={{__html: displayTopic.rawString}}></div>
+                </div>
             }
+
         </div>
     )
 }

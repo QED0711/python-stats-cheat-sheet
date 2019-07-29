@@ -1,10 +1,10 @@
 import React from 'react';
 
-const SearchForm = ({ setUserSearch, searchParams }) => {
+const SearchForm = ({ setUserSearch, searchParams, setDisplayTopic }) => {
 
     const handleChange = (e) => {
         e.preventDefault()
-
+        setDisplayTopic(null)
         const type = document.getElementById('search-type').value
         const match = document.getElementById('search-text').value
 
@@ -22,8 +22,8 @@ const SearchForm = ({ setUserSearch, searchParams }) => {
                 <select id="search-type" value={searchParams.type}>
                     <option value="title">Title</option>
                     <option value="tags">Tags</option>
-                    <option value="author">Author</option>
-                    <option value="rawString">Content Body</option>
+                    {/* <option value="author">Author</option>
+                    <option value="rawString">Content Body</option> */}
                 </select>
                 <br/>
                 <input type="text" id="search-text" value={searchParams.match} placeholder="Search..."/>

@@ -17,7 +17,7 @@ const filterTopics = (state) => {
       state.topics.forEach(notebook => {
         for(let topic of notebook.topics ){
           if(topic[state.userSearch.type].match(regex)){
-            topicList.push(topic.title)
+            topicList.push({title: topic.title, nbID: notebook._id})
           }
         }
       })

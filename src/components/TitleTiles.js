@@ -1,17 +1,20 @@
 import React from 'react'
 
-const TitleTiles = ({ topics, setUserSearch, setCurrentTopic }) => {
+import { fetchContentFromDB } from '../js/fetchFromDatabase';
+
+const TitleTiles = ({ topics, setDisplayTopic }) => {
     
-    const handleTileClick = (notebookID) => {
+    const handleTileClick = (notebookID, title) => {
         return () => {
-            setCurrentTopic(notebookID)
+            setDisplayTopic("loading")
+            fetchContentFromDB(notebookID, title, setDisplayTopic)
         }
     }
 
     const tiles = (topics) => {
         return topics.map((topic, i) => {
             return(
-                <div key={i} className="tile" onClick={handleTileClick(topic.nbID)}>
+                <div key={i} className="tile" onClick={handleTileClick(topic.nbID, topic.title)}>
                     {topic.title}
                 </div>
             ) 
@@ -21,6 +24,7 @@ const TitleTiles = ({ topics, setUserSearch, setCurrentTopic }) => {
     return(
         <div className="title-tiles">
             {tiles(topics)}
+            <hr/>
         </div>
     )
 
