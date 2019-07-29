@@ -64,8 +64,6 @@ class App extends Component {
   }
 
   render = () => {
-    console.log(this.state)
-    // fetchFromDatabase(this.setNotebooks)
     const topicList = filterTopics(this.state)
     const activeSearch = this.state.userSearch.match !== ""
 
