@@ -2,6 +2,9 @@
 import { mlabAPI, currentNotebookCollection, currentTopicsCollection } from '../keys';
 // import parseHTML from './parseHTML'; DEPRECEATED
 
+// Atlas Update
+// mongodb+srv://<username>:<password>@jupyter-notecards.2il5q.mongodb.net/jupyter-notecards?retryWrites=true&w=majority
+
 const fetchContentFromDB = (notebookID, title, setDisplayTopic) => {
     fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentNotebookCollection}/${notebookID}?apiKey=${mlabAPI}`)
     .then(response => {
@@ -20,7 +23,7 @@ const fetchContentFromDB = (notebookID, title, setDisplayTopic) => {
         // update topics in state with newly fetch data
         // const topics = json.map(notebook => {
         //     for(let nb of notebook.html){
-        //         nb.notebookID = notebook._id.$oid
+        //         nb.notebookID = notebook._id.$o
         //     }
         //     return notebook.html
         // })
