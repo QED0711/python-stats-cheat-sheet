@@ -25,3 +25,5 @@ yarn-error.log*
 keys.js
 
 data-backups/*.json
+
+lambda

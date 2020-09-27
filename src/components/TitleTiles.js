@@ -13,6 +13,7 @@ const TitleTiles = ({ topics, setDisplayTopic }) => {
 
     const tiles = (topics) => {
         return topics.map((topic, i) => {
+            
             return(
                 <div key={i} className="tile" onClick={handleTileClick(topic.nbID, topic.title)}>
                     {topic.title}

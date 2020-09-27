@@ -5,8 +5,14 @@ import { mlabAPI, currentNotebookCollection, currentTopicsCollection } from '../
 // Atlas Update
 // mongodb+srv://<username>:<password>@jupyter-notecards.2il5q.mongodb.net/jupyter-notecards?retryWrites=true&w=majority
 
+const BASE_URL = "https://qjawdb9hsf.execute-api.us-east-2.amazonaws.com/default"
+
+
+
 const fetchContentFromDB = (notebookID, title, setDisplayTopic) => {
-    fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentNotebookCollection}/${notebookID}?apiKey=${mlabAPI}`)
+    
+    // fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentNotebookCollection}/${notebookID}?apiKey=${mlabAPI}`)
+    fetch(`${BASE_URL}/notecard?id=${notebookID}`)
     .then(response => {
         return response.json()
     })
@@ -28,11 +34,14 @@ const fetchContentFromDB = (notebookID, title, setDisplayTopic) => {
         //     return notebook.html
         // })
         // updateTopics(topics.flat())
+    }).catch(err => {
+        console.log(err)
     })
 }
 
 const fetchTopicsFromDB = (setTopics) => {
-    fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentTopicsCollection}?apiKey=${mlabAPI}`)
+    // fetch(`https://api.mlab.com/api/1/databases/jupyter-notecards/collections/${currentTopicsCollection}?apiKey=${mlabAPI}`)
+    fetch(`${BASE_URL}/topics`)
     .then(response => {
         return response.json()
     })
